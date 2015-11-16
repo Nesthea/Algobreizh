@@ -20,8 +20,7 @@ if(!isset($_SESSION['log']))
 		}
 		else
 		{
-			echo 'Vous êtes connecté !<br/>';
-			echo '<a href="pages/login.php?logout=1">Deconnexion</a>';
+			include("includes/accueil.html");
 		}
 	?>
 </body>

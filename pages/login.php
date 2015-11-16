@@ -1,42 +1,41 @@
 <?php 
 
-	include("../lib/lib.php");
+	$__ROOT__ = dirname(__FILE__)."/..";
 
-	/*
-	 * TODO : - connexion à la bdd
-	 * 		  - stockage du hash
-	 * 	      - login en fonction du hash
-	 *        - Inscription
-	 */
-
+	require_once $__ROOT__.'/lib/lib.php';
+	
 	session_start();
 	
-	$connexion = createConnexion();
+	$db = createConnexion();
 	
-	if($connexion)
+	if($db)
 	{
 		$hash = hash('sha256', $_POST['password']);
-		$request = 'select hash from alg_identifiants where code="'.$_POST['code'].'"';
-		$res = $connexion->query($request);
+		$sql = "SELECT hash FROM alg_identifiants WHERE code = :code AND hash = :hash";
 		
-		if($res->fetch()['hash'] == $hash)
+		$stmt = $db->prepare($sql);
+		
+		if($stmt->execute(array("code" =>$_POST['code'], "hash" => $hash)))
 		{
-			$_SESSION['log'] = 1;
-			header("Location: ../index.php");
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			
-			die();
-		}
-		else
-		{
-			echo("Erreur de connexion<br/>");
-			echo('<a href="../index.php">Retourner à la page précédente</a>');
+			if($row)
+			{
+				$_SESSION['log'] = 1;
+				header("Location: ..");
+				die();
+			}
+			else
+			{
+				include($__ROOT__."/includes/error_login.html");
+			}
 		}
 	}
 	
 	if(isset($_GET['logout']) && $_GET['logout'] == 1)
 	{
 		$_SESSION['log'] = 0;
-		header("Location: ../index.php");
+		header("Location: ..");
 		
 		die();
 	}
