@@ -16,12 +16,7 @@ if(!isset($_SESSION['log']))
 	<?php
 		if($_SESSION['log'] == 0)
 		{
-			echo '<h1>Connexion</h1>';
-			echo '<form name="connexion" method="post" action="pages/login.php">';
-			echo 'Entrez votre adresse code client : <input type="text" name="code"/> <br/>';
-			echo 'Entrez votre mot de passe : <input type="password" name="password"/><br/>';
-			echo '<input type="submit" name="valider" value="OK"/>';
-			echo '</form>';
+			include("includes/login.html");
 		}
 		else
 		{
