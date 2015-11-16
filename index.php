@@ -25,5 +25,4 @@ if(!isset($_SESSION['log']))
 		}
 	?>
 </body>
-
 </html>
