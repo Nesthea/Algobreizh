@@ -1,35 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body style="background-color:grey;">
-	<div id="test" style="text-align:center;margin-top:20%;">
-		<label>Code client : </label><input type="text" name="codeClient"> <br/> <br/>
-		<button id="btnNewMdp">Demande de nouveau mot de passe</button>
-	</div>
-</body>
-<script type="text/javascript" src="../js/jquery-2.1.4.min.js">
+<?php 
+	
+	$__ROOT__ = dirname(__FILE__)."/..";
+	
+	require_once $__ROOT__.'/lib/lib.php';
+	
+	$Id = rand(10000, 99999);
+	$mdp = base_convert($Id, 20, 36);
+	$hash = hash('sha256', $mdp);
+	$DB = createConnexion();
+	
+	if ($DB)
+	{
+		$stmt = $DB->prepare('SELECT AssociatedCustomerId FROM contact WHERE AssociatedCustomerId = :code');
+		if ($stmt->execute(array('code'=>$_POST['codeClient'])))
+		{
+			if($stmt->fetch(PDO::FETCH_ASSOC))
+			{
+				echo $mdp;
+				$request = 'REPLACE INTO alg_identifiants (hash,code) VALUES (:hash,:code)';
+				$stmt = $DB->prepare($request);
+				if($stmt->execute(array('hash'=>$hash,'code'=>$_POST['codeClient'])))
+				{
+					$message = 'Code client : '.$_POST['codeClient'].'\r\nMot de passe : '.$mdp;
+					mail('flavien-huot-44@hotmail.fr','Vos identifiants Algobreizh', $message);
+				}
+			}
+			else 
+			{
+				echo 'Code client inexistant';
+			}
+		}
+		
+		
+	}
+		
+	
 
-var j$ = jQuery.noConflict();
 
-j$('#btnNewMdp').click(function(){
-	j$ window.location("../index.php");
-});
-
-
-
-
-
-</script>
-</html>
-
-
-
-
-
-
-
-
-
-
-
+?>
