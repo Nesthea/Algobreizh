@@ -4,14 +4,22 @@
 
 	require_once $__ROOT__.'/lib/lib.php';
 	
-	session_start();
+	if(!isset($_SESSION))
+	{
+		session_start();
+	}
+	
+	if(!isset($_SESSION['log']))
+	{
+		$_SESSION['log'] = 0;
+	}
 	
 	$db = createConnexion();
 	
 	if($db)
 	{
 		$hash = hash('sha256', $_POST['password']);
-		$sql = "SELECT hash FROM alg_identifiants WHERE code = :code AND hash = :hash";
+		$sql = "SELECT * FROM utilisateurs WHERE codeClient = :code AND motDePasse = :hash";
 		
 		$stmt = $db->prepare($sql);
 		
@@ -22,6 +30,7 @@
 			if($row)
 			{
 				$_SESSION['log'] = 1;
+				$_SESSION['code'] = $_POST['code'];
 				header("Location: ..");
 				die();
 			}
@@ -30,13 +39,13 @@
 				include($__ROOT__."/includes/error_login.html");
 			}
 		}
-	}
-	
-	if(isset($_GET['logout']) && $_GET['logout'] == 1)
-	{
-		$_SESSION['log'] = 0;
-		header("Location: ..");
 		
-		die();
+		if(isset($_GET['logout']) && $_GET['logout'] == 1)
+		{
+			$_SESSION['log'] = 0;
+			header("Location: ..");
+		
+			die();
+		}
 	}
 ?>

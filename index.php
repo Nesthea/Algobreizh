@@ -9,7 +9,7 @@ if(!isset($_SESSION['log']))
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Connexion</title>
+	<title>Suivis</title>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
@@ -20,7 +20,8 @@ if(!isset($_SESSION['log']))
 		}
 		else
 		{
-			include("includes/accueil.html");
+			header("Location: pages/home.php");
+			die();
 		}
 	?>
 </body>
