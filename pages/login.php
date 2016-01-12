@@ -31,6 +31,12 @@
 			{
 				$_SESSION['log'] = 1;
 				$_SESSION['code'] = $_POST['code'];
+				
+				if($row["teleprospecteur"] == 1)
+				{
+					$_SESSION['adm'] = 1;
+				}
+				
 				header("Location: ..");
 				die();
 			}

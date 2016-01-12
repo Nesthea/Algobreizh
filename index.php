@@ -1,9 +1,13 @@
-<?php 
-session_start();
-if(!isset($_SESSION['log']))
-{
-	$_SESSION['log'] = 0;
-}
+<?php
+	if(!isset($_SESSION))
+	{	
+		session_start();
+	}
+	if(!isset($_SESSION['log']))
+	{
+		$_SESSION['log'] = 0;
+		$_SESSION['adm'] = 0;
+	}
 ?>
 
 <!DOCTYPE html>
@@ -20,8 +24,16 @@ if(!isset($_SESSION['log']))
 		}
 		else
 		{
-			header("Location: pages/home.php");
-			die();
+			if($_SESSION['adm'] == 0)
+			{
+				header("Location: pages/home.php");
+				die();
+			}
+			else if($_SESSION['adm'] == 1)
+			{
+				header("Location: pages/admin.php");
+				die();
+			}
 		}
 	?>
 </body>

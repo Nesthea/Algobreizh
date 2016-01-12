@@ -24,6 +24,7 @@ function getLastOrders($codeClient)
 
 function getLastBills($codeClient)
 {
+	/*
 	$db = createConnexion();
 	
 	$sql = "";
@@ -33,8 +34,9 @@ function getLastBills($codeClient)
 	if($stmt->execute(array("codeClient"=>$codeClient)))
 	{
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
-	}
-
+	}*/
+	
+	return array(0 => array("idCommande" => 1, "dateCommande" => "01/01/1995", "montant" => 45.45, "valide"=>0, "codeClient" => 24));
 }
 
 function getOrderItems($idCommand)
@@ -57,7 +59,7 @@ function getOrderItems($idCommand)
 function getItemInfo($codeArticle)
 {
 	/*
-	 $db = createConnexion();
+	$db = createConnexion();
 	
 	$sql = "";
 	
@@ -67,5 +69,17 @@ function getItemInfo($codeArticle)
 	}*/
 
 	return array("codeArticle"=>$codeArticle, "libelleArticle"=>"patate", "prix"=>4, "unite"=>"Sachet de 50g");
+}
+
+function getLibelleArticle($idArticle)
+{
+	return "blah";
+}
+
+function getUnprocessedOrders()
+{
+	//$db = createConnexion();
+	
+	return array(0 => array("idCommande" => 1, "dateCommande" => "01/01/1995", "montant" => 45.45, "codeClient" => 24));
 }
 ?>
