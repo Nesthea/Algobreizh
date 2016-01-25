@@ -30,6 +30,7 @@
 <body>
 	<a href="/Algobreizh/pages/suivi.php?m=1">Commandes</a>
 	<a href="/Algobreizh/pages/suivi.php?m=2">Factures</a>
+	<a href="/Algobreizh/pages/produit.php">Pré-commande</a>
 	<a href="/Algobreizh/pages/login.php?logout=1">Deconnexion</a>
 </body>
 
