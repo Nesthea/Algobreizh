@@ -69,8 +69,6 @@ function getLibelleArticle($idArticle)
 	{
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
-	
-	return $idArticle;
 }
 
 function getUnprocessedOrders()
@@ -78,5 +76,10 @@ function getUnprocessedOrders()
 	$db = createConnexion();
 	
 	return array(0 => array("idCommande" => 1, "dateCommande" => "01/01/1995", "montant" => 45.45, "codeClient" => 24));
+}
+
+function createCommande($tabProduit)
+{
+	print_r($tabProduit);
 }
 ?>

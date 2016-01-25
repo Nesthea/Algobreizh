@@ -27,7 +27,25 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
-
+	<div class="container">
+		<nav class="navbar-default navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+            		<a class="navbar-brand" href="#">Algobreizh</a>
+          		</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+    					<li><a href="/Algobreizh/pages/home.php">Accueil</a></li>
+        				<li><a href="/Algobreizh/pages/suivi.php?m=1">Commandes</a></li>
+        				<li><a href="/Algobreizh/pages/suivi.php?m=2">Factures</a></li>
+        				<li><a href="/Algobreizh/pages/produit.php">Pré-commande</a></li>
+    				</ul>
+    				<ul class="nav navbar-nav navbar-right">
+    					<li><a href="/Algobreizh/pages/login.php?logout=1">Déconnexion</a></li>
+    				</ul>
+				</div>
+			</div>
+		</nav>
 <?php
 	$lastBills = null;
 	$lastOrders = null;
@@ -49,7 +67,6 @@
 		}
 	}
 	?>
-	<div class="container">
 	<div class="row">
 	<?php
 	if($lastBills != null)
@@ -100,6 +117,7 @@
 		}
 	}
 ?>
+</div>
 </div>
 </div>
 </div>
