@@ -1,25 +1,23 @@
-
 <html>
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body  style="background-image:url(./images/039665391adf84fa30eeb016481f7553_large.jpeg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;">
-<table style="width:100%">
-	<tr>
-		<td>
-			<img src="./images/AlgoBreizh_Logo_128px.png"/>
-		</td>
-		<td>
-			<h1 style="font-family:algerian;font-size:40px;margin-left:160px;">Algobreizh</h1>
-		</td>
-	</tr>
-</table>
-<div style="border: 1px solid black;opacity: 0.6;background-color: #000000;margin-top:150px;padding:50px;margin-left:500px;margin-right:500px" align="center">
-<form style="font-color:white; opacity: 0.9; filter: alpha(opacity=90)" align="center" name="connexion" method="post" action="pages/login.php">
-Code client : <input type="text" name="code"/> <br/><br/>
-Mot de passe : <input type="password" name="password"/><br/><br/>
-<input type="submit" name="valider" value="OK"/> <br/><br/>
-<a href="./includes/ask_password.html" style="color:darkgreen;">Demande de mot de passe</a>
-</form>
+<div>
+	<h1 style="font-family:algerian;font-size:60px;text-align:center;color:black;">ALGOBREIZH</h1>
 </div>
+<form name="connexion" method="post" action="pages/login.php">
+<div style="background: rgba(0, 0, 0, 0.7);margin-top:150px;padding:50px;margin-left:30%;margin-right:30%" align="center">
+	<div style="color:white;">Code client  : <input type="text" name="code"/></div> <br/><br/>
+	<div style="color:white">Mot de passe  : <input type="password" name="password"/></div><br/><br/>
+	<input class="btn" type="submit" name="valider" value="OK"/> <br/><br/>
+	<a href="./includes/ask_password.html" class="btn btn-success" style="">Demande de mot de passe</a>
+</div>
+</form>
 </body>
 </html>
