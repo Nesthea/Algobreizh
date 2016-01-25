@@ -15,7 +15,7 @@ if (!empty($tabLangages)) {
 	echo "Voici les produits que vous avez choisi:<br>";
 	
 	foreach($tabLangages as $cle => $valeur) {
-		echo getLibelleArticle($valeur).'<br>';
+		echo getLibelleArticle($valeur)['libelleArticle'].'<br>';
 	}
 }
 ?>
