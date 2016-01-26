@@ -2,11 +2,13 @@
 
 $__ROOT__ = dirname(__FILE__)."/..";
 
-require_once $__ROOT__."/lib/lib.php";
+
+array(0=>1,
+	  1=>1,
+      2=>1);
 
 
-
-header("Location: ..");
+//header("Location: ..");
 
 
 ?>

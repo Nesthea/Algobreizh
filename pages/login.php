@@ -45,10 +45,12 @@
 				include($__ROOT__."/includes/error_login.html");
 			}
 		}
-		
+
 		if(isset($_GET['logout']) && $_GET['logout'] == 1)
 		{
 			$_SESSION['log'] = 0;
+			$_SESSION['adm'] = 0;
+			$_SESSION['code'] = 0;
 			header("Location: ..");
 		
 			die();
