@@ -42,17 +42,37 @@ require_once $__ROOT__.'/lib/lib.php';
 				if($connexion)
 				{
 					$request='SELECT idFamille,libelleFamille FROM familles ';
-					$res = $connexion->query($request);
+					$resfamille = $connexion->query($request);
 			?>
-			<form action="listeproduit.php" method="post">
-			<select name="choix">
+			<form action="recuperation.php" method="post">
 			<?php
-				while ($donnes= $res->fetch()){
-					echo '<option value='.$donnes['idFamille'].'>'. $donnes['libelleFamille']. '</option>';
-				}
-			}
+				while ($donnes= $resfamille->fetch())
+				{
+					?>
+						<h4><?php echo '<p>'. $donnes['libelleFamille']. '</p>';?></h4>
+						<table>
+							<?php $connexion= createConnexion();
+							if($connexion){
+								$request='SELECT * FROM articles WHERE idFamille = :idFamille';
+								$stmt = $connexion->prepare($request);
+								
+								if($stmt->execute(array("idFamille"=>$donnes['idFamille'])))
+								{
+									$array = $stmt->fetchAll(PDO::FETCH_ASSOC);
+									foreach($array as $info)
+									{?>
+										<tr>
+											<td><img src=<?php echo "/Algobreizh/".$info["path"]?>></td>
+											<td><p> <?php echo $info['libelleArticle']?></p></td>
+											<td><input type="number" name="quantiter" value="0"></td>
+											<td><button type="button" >+</button></td>
+										</tr>
+						      <?php }?>
+						</table>
+				<?php
+								}}
+			}}
 			?>
-		</select>
 		<input type="submit" value="Valider" />
 		</form>
 		</div>
