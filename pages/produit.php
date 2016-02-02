@@ -3,7 +3,6 @@ $__ROOT__ = dirname(__FILE__)."/..";
 
 require_once $__ROOT__.'/lib/lib.php';
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +15,7 @@ require_once $__ROOT__.'/lib/lib.php';
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="background-image:url(../images/ChlorophyteVideo_FR-FR7444795778_1366x768.jpg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;">
 	<div class="container">
 		<nav class="navbar-default navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -36,8 +35,9 @@ require_once $__ROOT__.'/lib/lib.php';
 				</div>
 			</div>
 		</nav>
-		<div class="row">
-			<?php
+	</div>
+	<div  style="background: rgba(500, 500, 500, 0.8);width:70%;margin-left:15%;margin-right:15%;position:absolute;padding-top:5%;margin-top:-5%" >
+				<?php
 				$connexion= createConnexion();
 				if($connexion)
 				{
@@ -76,6 +76,5 @@ require_once $__ROOT__.'/lib/lib.php';
 		<input type="submit" value="Valider" />
 		</form>
 		</div>
-	</div>
 </body>
 </html>
