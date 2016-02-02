@@ -46,13 +46,10 @@
 				</div>
 			</div>
 		</nav>
-			
 	</div>
-	<div  style="background: rgba(500, 500, 500, 0.8);margin-left:15%;margin-right:15%;position:absolute;height:100%;padding-top:5%" >
-				<h1>PRESENTATION ALGOBREIZH</h1>
-				<h3>Haec dum oriens diu perferret, caeli reserato tepore Constantius consulatu suo septies et Caesaris ter egressus Arelate Valentiam petit, in Gundomadum et Vadomarium fratres Alamannorum reges arma moturus, quorum crebris excursibus vastabantur confines limitibus terrae Gallorum.
-
-Et est admodum mirum videre plebem innumeram mentibus ardore quodam infuso cum dimicationum curulium eventu pendentem. haec similiaque memorabile nihil vel serium agi Romae permittunt. ergo redeundum ad textum.</h3>
+	<div  style="background: rgba(500, 500, 500, 0.8);width:70%;margin-left:15%;margin-right:15%;position:absolute;height:100%;padding-top:5%" >
+				<h1></h1>
+				<h3></h3>
 			</div>
 </body>
 </html>
