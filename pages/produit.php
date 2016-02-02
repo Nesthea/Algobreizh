@@ -43,9 +43,7 @@ require_once $__ROOT__.'/lib/lib.php';
 				{
 					$request='SELECT idFamille,libelleFamille FROM familles ';
 					$resfamille = $connexion->query($request);
-			?>
-			<form action="recuperation.php" method="post">
-			<?php
+					
 				while ($donnes= $resfamille->fetch())
 				{
 					?>
@@ -62,10 +60,18 @@ require_once $__ROOT__.'/lib/lib.php';
 									foreach($array as $info)
 									{?>
 										<tr>
-											<td><img src=<?php echo "/Algobreizh/".$info["path"]?>></td>
-											<td><p> <?php echo $info['libelleArticle']?></p></td>
-											<td><input type="number" name="quantiter" value="0"></td>
-											<td><button type="button" >+</button></td>
+											<td>
+												<form class="form-item">
+													<table>
+														<tr>
+															<td><img src=<?php echo "/Algobreizh/".$info["path"]?>></td>
+															<td><p> <?php echo $info['libelleArticle']?></p></td>
+															<td><input type="number" name="quantite" value="0"><input type="hidden" name="product_code" value=<?php echo $info['idArticle']?>></td>
+															<td><button type="submit" >+</button></td>
+														</tr>
+													</table>
+												</form>
+											</td>
 										</tr>
 						     <?php }?>
 						</table>
@@ -73,9 +79,23 @@ require_once $__ROOT__.'/lib/lib.php';
 								}}
 			}}
 			?>
-		<input type="submit" value="Valider" />
-		</form>
 		</div>
 </body>
+<script type="text/javascript">
+$(".form-item").submit(function(e) {
+	var form_data = $(this).serialize();
+
+	$.ajax({
+		url:"ajax.php",
+		type:"POST",
+		dataType:"json",
+		data:form_data
+	}).done(function(data){
+		alert("Produit ajouté !");
+	})
+
+	e.preventDefault();
+});
+</script>
 </html>
 

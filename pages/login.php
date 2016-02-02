@@ -31,7 +31,7 @@
 			{
 				$_SESSION['log'] = 1;
 				$_SESSION['code'] = $_POST['code'];
-				
+				$_SESSION['panier'] = array();
 				if($row["teleprospecteur"] == 1)
 				{
 					$_SESSION['adm'] = 1;
