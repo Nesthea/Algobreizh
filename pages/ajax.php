@@ -16,7 +16,16 @@
 		$quantite = $_POST["quantite"];
 		$codeProduit = $_POST["product_code"];
 		
-		array_push($_SESSION['panier'], array("item" => $codeProduit, "qte" => $quantite));
+		$index = array_search($codeProduit, array_column($_SESSION["panier"], 'item'));
+		
+		if($index === FALSE)
+		{
+			array_push($_SESSION['panier'], array("item" => $codeProduit, "qte" => $quantite));
+		}
+		else
+		{
+			$_SESSION["panier"][$index]["qte"] += $quantite;
+		}
 		
 		$total_items = count($_SESSION["panier"]);
     	die(json_encode(array('items'=>$total_items)));

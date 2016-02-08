@@ -2,6 +2,12 @@
 $__ROOT__ = dirname(__FILE__)."/..";
 
 require_once $__ROOT__.'/lib/lib.php';
+
+if(!isset($_SESSION))
+{
+	session_start();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,6 +85,7 @@ require_once $__ROOT__.'/lib/lib.php';
 								}}
 			}}
 			?>
+			<input type="button" class="validate" value="Valider"/>
 		</div>
 </body>
 <script type="text/javascript">
@@ -95,6 +102,10 @@ $(".form-item").submit(function(e) {
 	})
 
 	e.preventDefault();
+});
+
+$(".validate").click(function(e) {
+	document.location.href = "panier.php";
 });
 </script>
 </html>
