@@ -1,14 +1,111 @@
-<?php
+<?php 
 
-$__ROOT__ = dirname(__FILE__)."/..";
+	$__ROOT__ = dirname(__FILE__)."/..";
+	
+	require_once $__ROOT__.'/lib/lib.php';
 
-
-array(0=>1,
-	  1=>1,
-      2=>1);
-
-
-//header("Location: ..");
-
-
+	if(!isset($_SESSION))
+	{
+		session_start();
+	}
+	
+	if($_SESSION['log'] == 0)
+	{
+		header("Location: ".$__ROOT__."/index.php");
+		die();
+	}
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<head>
+<title>Panier</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body
+	style="background-image: url(../images/ChlorophyteVideo_FR-FR7444795778_1366x768.jpg); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+	<div class="container">
+		<nav class="navbar-default navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Algobreizh</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/Algobreizh/pages/home.php">Accueil</a></li>
+						<li><a href="/Algobreizh/pages/suivi.php?m=1">Commandes</a></li>
+						<li><a href="/Algobreizh/pages/suivi.php?m=2">Factures</a></li>
+						<li><a href="/Algobreizh/pages/produit.php">Produits</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/Algobreizh/pages/panier.php"><span
+								class="glyphicon glyphicon-shopping-cart"></span><?php echo count($_SESSION['panier'])?></a>
+						
+						<li><a href="/Algobreizh/pages/login.php?logout=1">Déconnexion</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div
+		style="background: rgba(500, 500, 500, 0.8); width: 70%; margin-left: 15%; margin-right: 15%; position: absolute; height: 100%; padding-top: 5%">
+		<table>
+		<?php
+		print_r($_SESSION['panier']);
+		foreach($_SESSION['panier'] as $value)
+		{
+			$info = getItemInfo($value['item'])[0];
+		?>
+			<tr>
+				<td>
+					<form class="form-item">
+						<table>
+							<tr>
+								<td><img src=<?php echo "/Algobreizh/".$info["path"]?>></td>
+								<td><p> <?php echo $info['libelleArticle']?><input type="hidden" name="remove_code" value=<?php echo $info['idArticle']?>></p></td>
+								<td><button type="submit">X</button></td>
+							</tr>
+						</table>
+					</form>
+				</td>
+			</tr>
+		<?php }?>
+		</table>
+		<input type="button" class="validate" value="Valider" />
+	</div>
+</body>
+<script type="text/javascript">
+$(".form-item").submit(function(e) {
+	var form_data = $(this).serialize();
+
+	$.ajax({
+		url:"ajax.php",
+		type:"POST",
+		dataType:"json",
+		data:form_data
+	}).done(function(data){
+		//alert("Ajouté au panier !");
+		$('span.panier').text(data.items);
+	})
+
+	e.preventDefault();
+});
+
+$(".validate").click(function(e) {
+	alert("Commande envoyée !");
+	document.location.href = "home.php";
+});
+</script>
+</html>

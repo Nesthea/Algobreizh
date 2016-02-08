@@ -39,6 +39,8 @@ function getOrderItems($idCommand)
 
 	$sql = "select * from details where idCommande = :idCommande";
 	
+	$stmt = $db->prepare($sql);
+	
 	if($stmt->execute(array("idCommand"=>$idCommand)))
 	{
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -49,9 +51,11 @@ function getItemInfo($codeArticle)
 {
 	$db = createConnexion();
 	
-	$sql = "select * from articles where codeArticle = :codeArticle";
+	$sql = "select * from articles where idArticle = :idArticle";
 	
-	if($stmt->execute(array("codeArticle"=>$codeArticle)))
+	$stmt = $db->prepare($sql);
+	
+	if($stmt->execute(array("idArticle"=>$codeArticle)))
 	{
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}

@@ -38,9 +38,10 @@
     					<li><a href="/Algobreizh/pages/home.php">Accueil</a></li>
         				<li><a href="/Algobreizh/pages/suivi.php?m=1">Commandes</a></li>
         				<li><a href="/Algobreizh/pages/suivi.php?m=2">Factures</a></li>
-        				<li><a href="/Algobreizh/pages/produit.php">Pré-commande</a></li>
+        				<li><a href="/Algobreizh/pages/produit.php">Produits</a></li>
     				</ul>
     				<ul class="nav navbar-nav navbar-right">
+    					<li><a href="/Algobreizh/pages/panier.php"><span class="glyphicon glyphicon-shopping-cart"></span><?php echo count($_SESSION['panier'])?></a>
     					<li><a href="/Algobreizh/pages/login.php?logout=1">Déconnexion</a></li>
     				</ul>
 				</div>
