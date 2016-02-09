@@ -104,13 +104,13 @@
 			echo '<div id="accordion'.$i.'" class="accordion-body collapse">';
 			echo '<div class="panel-body">';
 			echo '<table>';
-			echo '<tr><td>Le : '.$lastOrder['dateCommande'].'</td><td>'.$lastOrder['montant'].'€</td></tr>';
+			echo '<tr><td>Le : '.$lastOrder['dateCommande'].'</td><td>'.round($lastOrder['montant'],2).'€</td></tr>';
 			echo '<tr><td>Details :</td></tr>';
 			foreach($items as $item)
 			{
-				$info = getItemInfo($item["codeArticle"]);
+				$info = getItemInfoByCode($item["codeArticle"])[0];
 				
-				echo '<tr><td>'.$info["libelleArticle"].'</td><td>'.$item["montant"].'</td></tr>';
+				echo '<tr><td>'.$info["libelleArticle"].'</td><td>'.round($item["montant"],2).'€</td></tr>';
 			}
 			echo '</table>';
 			echo '</div>';

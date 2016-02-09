@@ -62,9 +62,15 @@
 	<div style="background: rgba(500, 500, 500, 0.8); width: 70%; margin-left: 15%; margin-right: 15%; position: absolute; height: 100%; padding-top: 5%">
 		<table class="list-panier">
 		<?php
-		foreach($_SESSION['panier'] as $value)
+		if(count($_SESSION['panier']) <= 0)
 		{
-			$info = getItemInfo($value['item'])[0];
+			include($__ROOT__."/includes/pas-article.html");
+		}
+		else
+		{
+			foreach($_SESSION['panier'] as $value)
+			{
+				$info = getItemInfoById($value['item'])[0];
 		?>
 			<tr>
 				<td>
@@ -80,9 +86,11 @@
 					</form>
 				</td>
 			</tr>
-		<?php }?>
+		<?php }}?>
 		</table>
+		<?php if(count($_SESSION['panier']) > 0){?>
 		<input type="button" class="validate" value="Valider" />
+		<?php }?>
 	</div>
 </body>
 <script type="text/javascript">
@@ -104,7 +112,7 @@ $(".form-item").submit(function(e) {
 
 $(".validate").click(function(e) {
 	alert("Commande envoyée !");
-	document.location.href = "home.php";
+	document.location.href = "validate.php";
 });
 </script>
 </html>
