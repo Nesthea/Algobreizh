@@ -73,7 +73,8 @@ if(!isset($_SESSION))
 														<tr>
 															<td><img src=<?php echo "/Algobreizh/".$info["path"]?>></td>
 															<td><p> <?php echo $info['libelleArticle']?></p></td>
-															<td><input type="number" name="quantite" value="0"><input type="hidden" name="product_code" value=<?php echo $info['idArticle']?>></td>
+															<td><p><?php echo round(($info['prix']/(1+$info['TVA'])),2);?>€</p></td>
+															<td><input class="quantite" type="number" name="quantite" min="0" value="0"><input type="hidden" name="product_code" value=<?php echo $info['idArticle']?>></td>
 															<td><button type="submit" >+</button></td>
 														</tr>
 													</table>
@@ -92,16 +93,21 @@ if(!isset($_SESSION))
 <script type="text/javascript">
 $(".form-item").submit(function(e) {
 	var form_data = $(this).serialize();
-
-	$.ajax({
-		url:"ajax.php",
-		type:"POST",
-		dataType:"json",
-		data:form_data
-	}).done(function(data){
-		alert("Ajouté au panier !");
-		$('span.panier').text(data.items);
-	})
+	var json = $(this).serializeArray();
+	
+	if(json[0]['value'] != 0)
+	{
+		$.ajax({
+			url:"ajax.php",
+			type:"POST",
+			dataType:"json",
+			data:form_data
+		}).done(function(data){
+			alert("Ajouté au panier !");
+			$('span.panier').text(data.items);
+			$('input.quantite').val(0);
+		})
+	}
 
 	e.preventDefault();
 });

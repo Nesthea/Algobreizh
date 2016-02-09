@@ -1,6 +1,8 @@
 <?php 
 
 	$__ROOT__ = dirname(__FILE__)."/..";
+	
+	require_once $__ROOT__.'/lib/lib.php';
 
 	if(!isset($_SESSION))
 	{
@@ -18,9 +20,9 @@
 		$quantite = $_POST["quantite"];
 		$codeProduit = $_POST["product_code"];
 	
-		$index = array_search($codeProduit, array_column($_SESSION["panier"], 'item'));
+		$index = searchInCart($codeProduit, $_SESSION['panier']);
 	
-		if($index === FALSE)
+		if($index === null)
 		{
 			array_push($_SESSION['panier'], array("item" => $codeProduit, "qte" => $quantite));
 		}
@@ -35,14 +37,10 @@
 	
    	if(isset($_POST["remove_code"]) && isset($_SESSION["panier"]))
    	{
+   		$index = searchInCart($_POST["remove_code"], $_SESSION["panier"]);
+ 		
+   		unset($_SESSION["panier"][$index]);
    		
-   		$index = array_search($_POST["remove_code"], array_column($_SESSION["panier"], 'item'));
-   		
-   		if($index !== FALSE)
-   		{
-   			unset($_SESSION["products"][$index]);
-   		}
-   		 
    		$total_items = count($_SESSION["panier"]);
    		die(json_encode(array('items'=>$total_items)));
    	}

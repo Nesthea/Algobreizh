@@ -61,6 +61,16 @@ function getItemInfo($codeArticle)
 	}
 }
 
+
+function searchInCart ($id, $array) {
+	foreach ($array as $key => $val) {
+		if ($val['item'] == $id) {
+			return $key;
+		}
+	}
+	return null;
+}
+
 function getLibelleArticle($idArticle)
 {
 	$db = createConnexion();

@@ -59,11 +59,9 @@
 			</div>
 		</nav>
 	</div>
-	<div
-		style="background: rgba(500, 500, 500, 0.8); width: 70%; margin-left: 15%; margin-right: 15%; position: absolute; height: 100%; padding-top: 5%">
-		<table>
+	<div style="background: rgba(500, 500, 500, 0.8); width: 70%; margin-left: 15%; margin-right: 15%; position: absolute; height: 100%; padding-top: 5%">
+		<table class="list-panier">
 		<?php
-		print_r($_SESSION['panier']);
 		foreach($_SESSION['panier'] as $value)
 		{
 			$info = getItemInfo($value['item'])[0];
@@ -75,6 +73,7 @@
 							<tr>
 								<td><img src=<?php echo "/Algobreizh/".$info["path"]?>></td>
 								<td><p> <?php echo $info['libelleArticle']?><input type="hidden" name="remove_code" value=<?php echo $info['idArticle']?>></p></td>
+								<td><p><?php echo round($info['prix']*$value['qte']/(1+$info['TVA']),2);?>€</p></td>
 								<td><button type="submit">X</button></td>
 							</tr>
 						</table>
@@ -96,8 +95,8 @@ $(".form-item").submit(function(e) {
 		dataType:"json",
 		data:form_data
 	}).done(function(data){
-		//alert("Ajouté au panier !");
 		$('span.panier').text(data.items);
+		location.reload();
 	})
 
 	e.preventDefault();
