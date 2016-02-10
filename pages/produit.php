@@ -22,41 +22,32 @@ if(!isset($_SESSION))
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body style="background-image:url(../images/ChlorophyteVideo_FR-FR7444795778_1366x768.jpg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;">
-	<div class="container">
-		<nav class="navbar-default navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-            		<a class="navbar-brand" href="#">Algobreizh</a>
-          		</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-    					<li><a href="/Algobreizh/pages/home.php">Accueil</a></li>
-        				<li><a href="/Algobreizh/pages/suivi.php?m=1">Commandes</a></li>
-        				<li><a href="/Algobreizh/pages/suivi.php?m=2">Factures</a></li>
-        				<li><a href="/Algobreizh/pages/produit.php">Produits</a></li>
-    				</ul>
-    				<ul class="nav navbar-nav navbar-right">
-    					<li><a href="/Algobreizh/pages/panier.php"><span class="glyphicon glyphicon-shopping-cart panier"><?php echo count($_SESSION['panier'])?></span></a>
-    					<li><a href="/Algobreizh/pages/login.php?logout=1">Déconnexion</a></li>
-    				</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
+	<?php 
+		include ($__ROOT__."/includes/navbar.html");
+	?>
 	<div  style="background: rgba(500, 500, 500, 0.8);width:70%;margin-left:15%;margin-right:15%;position:absolute;padding-top:5%;margin-top:-5%" >
+		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 				<?php
 				$connexion= createConnexion();
 				if($connexion)
 				{
 					$request='SELECT idFamille,libelleFamille FROM familles ';
 					$resfamille = $connexion->query($request);
+					$i = 0;
 					
 				while ($donnes= $resfamille->fetch())
 				{
 					?>
-						<h4><?php echo '<p>'. $donnes['libelleFamille']. '</p>';?></h4>
-						<table style="width:100%">
-							<?php $connexion= createConnexion();
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="heading<?= $i ?>">
+										<h4 class="panel-title">
+											<a role="button" data-toggle="collapse" href="#accordion<?= $i ?>" aria-expanded="true" aria-controls="accordion<?= $i ?>"><?php echo  $donnes['libelleFamille']?></a>
+										</h4>
+									</div>
+									<div id="accordion<?= $i ?>" class="accordion-body collapse collapse in">
+										<div class="panel-body">
+								<table style="width:100%">
+							<?php
 							if($connexion){
 								$request='SELECT * FROM articles WHERE idFamille = :idFamille';
 								$stmt = $connexion->prepare($request);
@@ -82,12 +73,18 @@ if(!isset($_SESSION))
 											</td>
 										</tr>
 						     <?php }?>
-						</table>
 				<?php
-								}}
-			}}
+								}}?>
+								</table>
+							</div>
+						</div>
+					</div>
+			<?php 
+			$i++;
+				}}
 			?>
-			<input type="button" class="validate" value="Valider"/>
+		</div>
+		<input type="button" class="validate" value="Valider"/>
 		</div>
 </body>
 <script type="text/javascript">

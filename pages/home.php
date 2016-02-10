@@ -27,27 +27,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body style="background-image:url(../images/ChlorophyteVideo_FR-FR7444795778_1366x768.jpg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;">
-	<div class="container">
-		<nav class="navbar-default navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-            		<a class="navbar-brand" href="#">Algobreizh</a>
-          		</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-    					<li><a href="/Algobreizh/pages/home.php">Accueil</a></li>
-        				<li><a href="/Algobreizh/pages/suivi.php?m=1">Commandes</a></li>
-        				<li><a href="/Algobreizh/pages/suivi.php?m=2">Factures</a></li>
-        				<li><a href="/Algobreizh/pages/produit.php">Produits</a></li>
-    				</ul>
-    				<ul class="nav navbar-nav navbar-right">
-    					<li><a href="/Algobreizh/pages/panier.php"><span class="glyphicon glyphicon-shopping-cart"></span><?php echo count($_SESSION['panier'])?></a>
-    					<li><a href="/Algobreizh/pages/login.php?logout=1">Déconnexion</a></li>
-    				</ul>
-				</div>
-			</div>
-		</nav>
-	</div>
+	<?php 
+		include ($__ROOT__."/includes/navbar.html");
+	?>
 	<div  style="background: rgba(500, 500, 500, 0.8);width:70%;margin-left:15%;margin-right:15%;position:absolute;height:100%;padding-top:5%" >
 				<h1></h1>
 				<h3></h3>
