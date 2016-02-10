@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="icon" type="image/png" href="/Algobreizh/images/AlgoBreizh_Logo_48px.png"/>
 </head>
 <body class="background-site">
 	<?php 
