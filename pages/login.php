@@ -18,34 +18,36 @@
 	
 	if($db)
 	{
-		$hash = hash('sha256', $_POST['password']);
-		$sql = "SELECT * FROM utilisateurs WHERE codeClient = :code AND motDePasse = :hash";
-		
-		$stmt = $db->prepare($sql);
-		
-		if($stmt->execute(array("code" =>$_POST['code'], "hash" => $hash)))
+		if(isset($_POST['password']) && isset($_POST['code']))
 		{
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$hash = hash('sha256', $_POST['password']);
+			$sql = "SELECT * FROM utilisateurs WHERE codeClient = :code AND motDePasse = :hash";
 			
-			if($row)
+			$stmt = $db->prepare($sql);
+			
+			if($stmt->execute(array("code" =>$_POST['code'], "hash" => $hash)))
 			{
-				$_SESSION['log'] = 1;
-				$_SESSION['code'] = $_POST['code'];
-				$_SESSION['panier'] = array();
-				if($row["teleprospecteur"] == 1)
-				{
-					$_SESSION['adm'] = 1;
-				}
+				$row = $stmt->fetch(PDO::FETCH_ASSOC);
 				
-				header("Location: ..");
-				die();
-			}
-			else
-			{
-				include($__ROOT__."/includes/error_login.html");
+				if($row)
+				{
+					$_SESSION['log'] = 1;
+					$_SESSION['code'] = $_POST['code'];
+					$_SESSION['panier'] = array();
+					if($row["teleprospecteur"] == 1)
+					{
+						$_SESSION['adm'] = 1;
+					}
+					
+					header("Location: ..");
+					die();
+				}
+				else
+				{
+					include($__ROOT__."/includes/error_login.html");
+				}
 			}
 		}
-
 		if(isset($_GET['logout']) && $_GET['logout'] == 1)
 		{
 			$_SESSION['log'] = 0;

@@ -175,6 +175,20 @@ function insertDetails($tabProduit, $idCommande)
 	
 }
 
+function valideCommande($idCommande)
+{
+	$db = createConnexion();
+	
+	$sql = "update `commandes` set `valide` = true where `idCommande` = :idCommande";
+	
+	$stmt = $db->prepare($sql);
+	
+	if($stmt->execute(array("idCommande"=>$idCommande)))
+	{
+		
+	}
+}
+
 function createCommande($tabProduit)
 {
 	$db = createConnexion();

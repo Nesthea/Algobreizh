@@ -58,10 +58,10 @@
 		switch($_GET["m"])
 		{
 			case 1:
-				$lastOrders = getLastOrders($_SESSION['code']);
+				$lastValues = getLastOrders($_SESSION['code']);
 				break;
 			case 2:
-				$lastBills = getLastBills($_SESSION['code']);
+				$lastValues = getLastBills($_SESSION['code']);
 				break;
 				
 			default:
@@ -70,58 +70,45 @@
 		}
 	}
 	?>
-	<div class="row">
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 	<?php
-	if($lastBills != null)
-	{
 		$i = 0;
-		foreach($lastBills as $lastBill)
+		foreach($lastValues as $lastValue)
 		{
-			$valide = $lastBill['valide'] ? "valide" : "non valide";
-			echo '<h4>Numéro de commande : '.$lastBill['idCommande'].'</h4>';
-			echo '<table>';
-			echo '<tr><td>Le : '.$lastBill['dateCommande'].'</td><td>'.$lastBill['montant'].'€</td><td>Statut :'.$valide.'</td></tr>';
-			echo '</table>';
+			$items = getOrderItems($lastValue['idCommande']);
+			?>
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="heading<?= $i?>">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" href="#accordion<?= $i?>" aria-expanded="true" aria-controls="accordion<?= $i?>">Numéro de commande : <?= $lastValue['idCommande']?></a>
+					</h4>
+				</div>
+				<div id="accordion<?= $i?>" class="accordion-body collapse">
+					<div class="panel-body">
+						<table style="width:100%">
+							<tr><td>Le : <?= $lastValue['dateCommande']?></td><td>Statut : <?= $lastValue['valide'] ? "Validé" : "Non validé"?></tr>
+							<tr><td><b>Libelle</b></td><td><b>Quantite</b></td><td><b>Prix</b></td></tr>
+							
+							<?php
+							foreach($items as $item)
+							{
+								$info = getItemInfoByCode($item["codeArticle"])[0];
+							?>
+							
+								<tr><td><?= $info["libelleArticle"]?></td><td><?= $item["qteArticle"]?></td><td><?= round($item["montant"],2)?>€</td></tr>
+							<?php
+							}
+							?>
+							<tr><td><b>Total :</b></td><td></td><td><?= round($lastValue['montant'],2)?>€</td></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<?php
 			$i++;
 		}
-	}
-	else if($lastOrders != null)
-	{
-		?>
-		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-		<?php
-		$i = 0;
-		foreach($lastOrders as $lastOrder)
-		{
-			$items = getOrderItems($lastOrder['idCommande']);
-
-			echo '<div class="panel panel-default">';
-			echo '<div class="panel-heading" role="tab" id="heading'.$i.'">';
-			echo '<h4 class="panel-title">';
-			echo '<a role="button" data-toggle="collapse" data-parent="#accordion" href="#accordion'.$i.'" aria-expanded="true" aria-controls="accordion'.$i.'">Numéro de commande : '.$lastOrder['idCommande'].'</a>';
-			echo '</h4>';
-			echo '</div>';
-			echo '<div id="accordion'.$i.'" class="accordion-body collapse">';
-			echo '<div class="panel-body">';
-			echo '<table>';
-			echo '<tr><td>Le : '.$lastOrder['dateCommande'].'</td><td>'.round($lastOrder['montant'],2).'€</td></tr>';
-			echo '<tr><td>Details :</td></tr>';
-			foreach($items as $item)
-			{
-				$info = getItemInfoByCode($item["codeArticle"])[0];
-				
-				echo '<tr><td>'.$info["libelleArticle"].'</td><td>'.round($item["montant"],2).'€</td></tr>';
-			}
-			echo '</table>';
-			echo '</div>';
-			echo '</div>';
-			echo '</div>';
-			$i++;
-		}
-	}
 ?>
 </div>
-<div>
 </div>
 </body>
 </html>

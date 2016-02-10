@@ -26,68 +26,79 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
-<body>
-	<div class="container">
-		<nav class="navbar-default navbar-inverse navbar-fixed-top">
-				<div class="container-fluid">
-					<div class="navbar-header">
-	            		<a class="navbar-brand" href="#">Algobreizh</a>
-	          		</div>
-					<div id="navbar" class="navbar-collapse collapse">
-	    				<ul class="nav navbar-nav navbar-right">
-	    					<li><a href="/Algobreizh/pages/login.php?logout=1">Déconnexion</a></li>
-	    				</ul>
+	<body style="background-image: url(../images/ChlorophyteVideo_FR-FR7444795778_1366x768.jpg); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+		<div class="container">
+			<nav class="navbar-default navbar-inverse navbar-fixed-top">
+					<div class="container-fluid">
+						<div class="navbar-header">
+		            		<a class="navbar-brand" href="#">Algobreizh</a>
+		          		</div>
+						<div id="navbar" class="navbar-collapse collapse">
+		    				<ul class="nav navbar-nav navbar-right">
+		    					<li><a href="/Algobreizh/pages/login.php?logout=1">Déconnexion</a></li>
+		    				</ul>
+						</div>
 					</div>
-				</div>
-			</nav>
-			<div class="row">
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				<?php
-					$oders = getUnprocessedOrders();
-					
-					$i=0;
-					foreach($oders as $lastOrder)
-					{
-						echo '<div class="panel-heading" role="tab" id="heading'.$i.'">';
-						echo '<h4 class="panel-title">';
-						echo '<a role="button" data-toggle="collapse" data-parent="#accordion" href="#accordion'.$i.'" aria-expanded="true" aria-controls="accordion'.$i.'">Numéro de commande : '.$lastOrder['idCommande'].'</a>';
-						echo '</h4>';
-						echo '</div>';
-						echo '<div id="accordion'.$i.'" class="accordion-body collapse">';
-						echo '<div class="panel-body">';
-						echo '<table>';
-						echo '<tr><td>Le : '.$lastOrder['dateCommande'].'</td><td>'.$lastOrder['montant'].'€</td></tr>';
-						echo '<tr><td>Details :</td></tr>';
-						
-						$items = getOrderItems($lastOrder['idCommande']);
-						
-						foreach($items as $item)
-						{
-							$info = getItemInfo($item["codeArticle"]);
-							
-							echo '<tr><td>'.$info["libelleArticle"].'</td><td>'.$item["montant"].'</td></tr>';
-						}
-						echo '</table>';
-						echo '</div>';
-						echo '</div>';
-						echo '</div>';
-						$i++;
-					}
-				?>
+				</nav>
 			</div>
-			<a href="/Algobreizh/pages/login.php?logout=1">Deconnexion</a>
+			<div style="background: rgba(500, 500, 500, 0.8); width: 70%; margin-left: 15%; margin-right: 15%; position: absolute; height: 100%; padding-top: 5%">
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<?php
+						$oders = getUnprocessedOrders();
+						
+						$i=0;
+						foreach($oders as $lastOrder)
+						{
+							?>
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading<?= $i ?>">
+									<h4 class="panel-title">
+										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#accordion<?= $i ?>" aria-expanded="true" aria-controls=accordion<?= $i ?>>Numéro de commande : <?= $lastOrder['idCommande'] ?></a>
+									</h4>
+								</div>
+								<div id="accordion<?= $i?>" class="accordion-body collapse">
+								<div class="panel-body">
+								<table style="width:100%">
+									<tr><td>Le : <?= $lastOrder['dateCommande']?></td></tr>
+									<tr><td><b>Libelle</b></td><td><b>Quantite</b></td><td><b>Prix</b></td></tr>
+									<?php
+										$items = getOrderItems($lastOrder['idCommande']);
+							
+										foreach($items as $item)
+										{
+											$info = getItemInfoByCode($item["codeArticle"])[0];
+									?>
+									<tr><td><?= $info["libelleArticle"]?></td><td><?= $item["qteArticle"]?><td><?= round($item["montant"],2)?>€</td></tr>
+									<?php
+										}
+									?>
+									<tr><td><b>Total :</b></td><td></td><td><?= round($lastOrder['montant'],2)?>€</td></tr>
+									<tr><td><form class="form-item"><input type="hidden" name="idCommande" value=<?= $lastOrder["idCommande"];?>><button type="submit">Valider</button></form></td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					<?php
+							$i++;
+						}
+					?>
+			</div>
 		</div>
-	</div>
-</body>
-<script>
-	$("submit").click(function(){
-		var checked = [];
+	</body>
+<script type="text/javascript">
+$(".form-item").submit(function(e) {
+	var form_data = $(this).serialize();
 
-		$(":checkbox:checked").each(function() {
-			checked.push($(this).val());
-		}
+	$.ajax({
+		url:"ajax.php",
+		type:"POST",
+		dataType:"json",
+		data:form_data
+	}).done(function(data){
+		location.reload();
+	})
 
-		window.location = "process.php?data="+encodeURIComponent(JSON.stringify(t));
-	}
+	e.preventDefault();
+});
 </script>
 </html>

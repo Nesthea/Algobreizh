@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Suivis</title>
+	<title>Algobreizh</title>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>

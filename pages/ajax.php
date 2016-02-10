@@ -44,4 +44,10 @@
    		$total_items = count($_SESSION["panier"]);
    		die(json_encode(array('items'=>$total_items)));
    	}
+   	
+   	if(isset($_SESSION['adm']) && $_SESSION['adm'] == 1 && isset($_POST["idCommande"]))
+   	{
+   		valideCommande($_POST["idCommande"]);
+   		die(json_encode(array("done"=>true)));
+   	}
 ?>
