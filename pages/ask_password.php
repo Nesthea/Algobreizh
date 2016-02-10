@@ -33,7 +33,7 @@
 				if($stmt->fetch(PDO::FETCH_ASSOC))
 				{
 					if(filter_var($_POST['mailClient'], FILTER_VALIDATE_EMAIL)){
-							//L'email est bonne
+							//L'email est bon
 						
 						?>
 						<div id="msgEnvoye" style="background: rgba(0, 0, 0, 0.7);margin-top:150px;padding:20px;margin-left:30%;margin-right:30%;" align="center">
