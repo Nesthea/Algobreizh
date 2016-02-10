@@ -9,7 +9,7 @@ function getLastOrders($codeClient)
 {
 	$db = createConnexion();
 	
-	$sql = "select * from commandes where codeClient = :codeClient order by dateCommande";
+	$sql = "select * from commandes where codeClient = :codeClient and valide=false order by dateCommande desc";
 	
 	$stmt = $db->prepare($sql);
 	
@@ -23,7 +23,7 @@ function getLastBills($codeClient)
 {
 	$db = createConnexion();
 	
-	$sql = "select * from commandes where codeClient = :codeClient order by dateCommande";
+	$sql = "select * from commandes where codeClient = :codeClient and valide=true order by dateCommande desc";
 	
 	$stmt = $db->prepare($sql);
 	
