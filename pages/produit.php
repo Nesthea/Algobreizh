@@ -11,7 +11,7 @@ if(!isset($_SESSION))
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 	<title>Sélection de la Famille de produit</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -55,7 +55,7 @@ if(!isset($_SESSION))
 				{
 					?>
 						<h4><?php echo '<p>'. $donnes['libelleFamille']. '</p>';?></h4>
-						<table>
+						<table style="width:100%">
 							<?php $connexion= createConnexion();
 							if($connexion){
 								$request='SELECT * FROM articles WHERE idFamille = :idFamille';
@@ -69,13 +69,13 @@ if(!isset($_SESSION))
 										<tr>
 											<td>
 												<form class="form-item">
-													<table>
+													<table class="table table-hover">
 														<tr>
-															<td><img src=<?php echo "/Algobreizh/".$info["path"]?>></td>
-															<td><p> <?php echo $info['libelleArticle']?></p></td>
-															<td><p><?php echo round(($info['prix']/(1+$info['TVA'])),2);?>€</p></td>
-															<td><input class="quantite" type="number" name="quantite" min="0" value="0"><input type="hidden" name="product_code" value=<?php echo $info['idArticle']?>></td>
-															<td><button type="submit" >+</button></td>
+															<td style="width:20%"><img src=<?php echo "/Algobreizh/".$info["path"]?>></td>
+															<td style="width:40%"><p> <?php echo $info['libelleArticle']?></p></td>
+															<td style="width:10%"><p><?php echo round(($info['prix']/(1+$info['TVA'])),2);?>€</p></td>
+															<td style="width:20%"><input class="quantite" type="number" name="quantite" min="0" value="0"><input type="hidden" name="product_code" value=<?php echo $info['idArticle']?>></td>
+															<td style="width:10%"><button type="submit" >+</button></td>
 														</tr>
 													</table>
 												</form>
