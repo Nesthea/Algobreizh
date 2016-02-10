@@ -1,3 +1,24 @@
-body { 
-    padding-top: 65px; 
+.background-site { 
+    background-image:url(../images/background.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+.padded {
+	padding-top: 65px;
+}
+
+.home {
+	background-image:url(../images/home.jpg);
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+}
+
+.main-title {
+	font-family:algerian;
+	font-size:60px;
+	text-align:center;
+	color:black;
 }

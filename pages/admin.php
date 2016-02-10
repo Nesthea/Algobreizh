@@ -26,7 +26,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
-	<body style="background-image: url(../images/ChlorophyteVideo_FR-FR7444795778_1366x768.jpg); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+	<body class="background-site padded">
 		<div class="container">
 			<nav class="navbar-default navbar-inverse navbar-fixed-top">
 					<div class="container-fluid">

@@ -18,10 +18,11 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../css/style.css"/>
 	</head>
-	<body  style="background-image:url(../images/039665391adf84fa30eeb016481f7553_large.jpeg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;">
+	<body class="home">
 		<div>
-		<h1 style="font-family:algerian;font-size:60px;text-align:center;color:black;">ALGOBREIZH</h1>
+			<h1 class="main-title">ALGOBREIZH</h1>
 		</div>
 		
 		<?php 
@@ -37,9 +38,9 @@
 						
 						?>
 						<div id="msgEnvoye" style="background: rgba(0, 0, 0, 0.7);margin-top:150px;padding:20px;margin-left:30%;margin-right:30%;" align="center">
-						<label style="color:white;font-size:20px;">Nouveau mot de passe envoyé <br/> à l'adresse : <br/> <?php echo $_POST['mailClient']  ?> </label>
-							</div>
-							<?php
+							<label style="color:white;font-size:20px;">Nouveau mot de passe envoyé <br/> à l'adresse : <br/> <?php echo $_POST['mailClient']  ?> </label>
+						</div>
+						<?php
 						echo $mdp;
 						$request = 'REPLACE INTO utilisateurs (motDePasse,codeClient) VALUES (:hash,:code)';
 						$stmt = $DB->prepare($request);
@@ -54,18 +55,24 @@
 					{
 						?>
 									<div id="msgEnvoye" style="background: rgba(0, 0, 0, 0.8);margin-top:300px;padding:20px;margin-left:30%;margin-right:30%;" align="center">
-									<label style="color:white;font-size:20px;">E-mail incorrect</label>
-										</div>
-										<?php
+										<label style="color:white;font-size:20px;">E-mail incorrect</label>
+										<br/>
+										<br/>
+										<a href="./" class="btn btn-success" style="">Retour</a>
+									</div>
+									<?php
 					}
 				}
 				else 
 				{
 					?>
 									<div id="msgEnvoye" style="background: rgba(0, 0, 0, 0.8);margin-top:300px;padding:20px;margin-left:30%;margin-right:30%;" align="center">
-									<label style="color:white;font-size:20px;">Code client incorrect</label>
-										</div>
-										<?php
+										<label style="color:white;font-size:20px;">Code client incorrect</label>
+										<br/>
+										<br/>
+										<a href="./" class="btn btn-success" style="">Retour</a>
+									</div>
+									<?php
 				}
 			}
 			

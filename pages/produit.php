@@ -12,7 +12,7 @@ if(!isset($_SESSION))
 <!DOCTYPE html>
 <html>
 <head> 
-	<title>Sélection de la Famille de produit</title>
+	<title>Produits</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/Algobreizh/css/style.css"/>
@@ -21,11 +21,11 @@ if(!isset($_SESSION))
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
-<body style="background-image:url(../images/ChlorophyteVideo_FR-FR7444795778_1366x768.jpg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;">
+<body class="background-site padded">
 	<?php 
 		include ($__ROOT__."/includes/navbar.html");
 	?>
-	<div  style="background: rgba(500, 500, 500, 0.8);width:70%;margin-left:15%;margin-right:15%;position:absolute;padding-top:5%;margin-top:-5%" >
+	<div style="background: rgba(500, 500, 500, 0.8);width:70%;margin-left:15%;margin-right:15%;position:absolute;padding-top:5%;margin-top:-5%" >
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 				<?php
 				$connexion= createConnexion();

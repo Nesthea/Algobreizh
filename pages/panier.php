@@ -19,20 +19,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
-<head>
 <title>Panier</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body style="background-image: url(../images/ChlorophyteVideo_FR-FR7444795778_1366x768.jpg); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
 	<?php 
@@ -43,7 +36,7 @@
 		<?php
 		if(count($_SESSION['panier']) <= 0)
 		{
-			include($__ROOT__."/includes/pas-article.html");
+			echo "<p>Vous n'avez pas d'article.</p>";
 		}
 		else
 		{
